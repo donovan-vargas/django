@@ -1,0 +1,13 @@
+{% extends 'accounts/base_accounts.html' %}
+
+{% block title %}Editar Foto{% endblock %}
+
+{% block accounts_content %}
+    <h2 class="page-header">Editar foto</h2>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Actualizar Foto</button>
+        <a href="{% url 'accounts.index' %}" class="btn btn-warning" type="submit">Cancelar</a>
+    </form>
+{% endblock accounts_content %}
