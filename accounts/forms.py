@@ -1,6 +1,7 @@
 # coding=utf-8
 from django import forms
 from django.contrib.auth.models import User
+
 from .models import StatesCatalog, SuburbCatalog, PostalCodeCatalog, CitiesCatalog
 
 
@@ -116,12 +117,11 @@ class RegisterUserForm(forms.Form):
         return password2
 
 
-
 class AddAddress(forms.Form):
     state = forms.ModelChoiceField(
         queryset=StatesCatalog.objects.all().order_by('state'),
         label='Estado',
-         widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.Select(attrs={'class': 'form-control'})
     )
     city = forms.ModelChoiceField(
         queryset=CitiesCatalog.objects.all().order_by('city'),
@@ -158,6 +158,7 @@ class AddAddress(forms.Form):
         label='Cruce',
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
+
 
 class UpdateUserAddress(forms.Form):
     state = forms.ModelChoiceField(
