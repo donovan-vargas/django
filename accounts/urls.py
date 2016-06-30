@@ -12,8 +12,6 @@ urlpatterns = [
     url(r'^editar_email/$', views.edit_email_view, name='accounts.editar_email'),
     url(r'^editar_foto/$', views.edit_photo_view, name='accounts.editar_foto'),
     url(r'^editar_contrasena/$', views.edit_password_view, name='accounts.editar_contrasena'),
-    url(r'^agregar_direccion/$', views.add_address_view, name='accounts.agregar_direccion'),
-    url(r'^editar_direccion/(?P<pk>\d+)/$', views.edit_address_view, name='accounts.editar_direccion'),
     url(r'^password_reset/$',
         'django.contrib.auth.views.password_reset',
         {'post_reset_redirect': 'accounts.password_reset_done', 'template_name': 'accounts/password_reset_form.html'},

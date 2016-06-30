@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^home/', include('home.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^addresses/', include('addresses.url')),
+    url(r'^companies/', include('companies.url')),
 ]
 
 if settings.DEBUG:

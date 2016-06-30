@@ -8,6 +8,6 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button class="btn btn-primary" type="submit">Actualizar Email</button>
-        <a href="{% url 'accounts.agregar_direccion' %}" class="btn btn-warning" type="submit">Cancelar</a>
+        <a href="{% url 'addresses.agregar_direccion' %}" class="btn btn-warning" type="submit">Cancelar</a>
     </form>
 {% endblock accounts_content %}

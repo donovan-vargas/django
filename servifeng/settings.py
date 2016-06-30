@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'accounts',
+    'addresses',
+    'companies',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -81,7 +84,7 @@ WSGI_APPLICATION = 'servifeng.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'servifeng',
+        'NAME': 'servicescompanies',
         'USER': 'donovan',
         'PASSWORD': 'zen.py32',
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
