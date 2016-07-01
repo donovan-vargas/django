@@ -76,7 +76,7 @@ class RegisterUserForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )"""
     email = forms.EmailField(
-        label='Correo electronico',
+        label='Correo electrónico',
         widget=forms.EmailInput(attrs={'class': 'form-control'})
     )
     password = forms.CharField(
@@ -110,6 +110,6 @@ class RegisterUserForm(forms.Form):
         password = self.cleaned_data['password']
         password2 = self.cleaned_data['password2']
         if password != password2:
-            raise forms.ValidationError('Las contraseñas no coinciden')
+            raise forms.ValidationError('Los passwords no coinciden')
         return password2
 
