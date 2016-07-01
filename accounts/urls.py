@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.conf.urls import url
-from . import views
 
+from . import views
 
 urlpatterns = [
     url(r'^registro/$', views.register_user_view, name='accounts.registro'),
@@ -19,7 +19,7 @@ urlpatterns = [
         {'post_reset_redirect': 'accounts.password_reset_done', 'template_name': 'accounts/password_reset_form.html'},
         name='accounts.password_reset'),
     url(r'^password_reset_done/$',
-     'django.contrib.auth.views.password_reset_done',
+        'django.contrib.auth.views.password_reset_done',
         {'template_name': 'accounts/password_reset_done.html'},
         name='accounts.password_reset_done'),
     url(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',

@@ -1,17 +1,17 @@
 # coding=utf-8
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
-from django.core.mail.message import EmailMessage
 from django.contrib import messages
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from django.core.mail.message import EmailMessage
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.shortcuts import render
+
 from .forms import RegisterUserForm, EditEmailForm, EditPasswordForm, EditPhoto, AddAddress, UpdateUserAddress
 from .models import UserProfile, UserAddress
-from django.core.urlresolvers import reverse
-from django.contrib.auth.views import password_reset, password_reset_confirm
+
 
 # Create your views here.
 
@@ -170,6 +170,7 @@ def edit_photo_view(request):
         form = EditPhoto()
     return render(request, 'accounts/editar_foto.html', {'form': form})
 
+
 @login_required
 def add_address_view(request):
     if request.method == 'POST':
@@ -201,10 +202,11 @@ def add_address_view(request):
         form = AddAddress()
     addresses = UserAddress.objects.filter(user=request.user)
     context_address = {
-         'addresses': addresses
+        'addresses': addresses
     }
     return render(request, 'accounts/agregar_direccion.html', {'form': form,
                                                                'addresses': addresses})
+
 
 @login_required
 def edit_address_view(request, pk):
@@ -245,4 +247,3 @@ def edit_address_view(request, pk):
                                    'crossing_y': addresses.crossing_y,})
 
     return render(request, 'accounts/editar_direccion.html', {'form': form})
-

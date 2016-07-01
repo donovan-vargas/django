@@ -1,12 +1,14 @@
-from django.shortcuts import render
-from django.utils import timezone
+from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render
+from django.utils import timezone
+
+
 # Create your views here.
 def index_view(request):
     context = {
-        'ahora' : timezone.now()
+        'ahora': timezone.now()
     }
     """Valida el acceso del usuario"""
     # Si el usuario ya esta logueado, lo direccionamos a index_view
@@ -29,4 +31,3 @@ def index_view(request):
         mensaje = 'Nombre de usuario o password no valido'
     return render(request, 'home/index.html', context)
     # return render(request, 'home/index.html', context)
-

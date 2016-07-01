@@ -3,14 +3,14 @@
 from __future__ import unicode_literals
 
 import datetime
+
+import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
-import django.db.models.deletion
 from django.utils.timezone import utc
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('accounts', '0003_auto_20160613_1631'),
@@ -52,10 +52,15 @@ class Migration(migrations.Migration):
                 ('street', models.CharField(max_length=150)),
                 ('crossing_x', models.CharField(blank=True, max_length=150, null=True)),
                 ('crossing_y', models.CharField(blank=True, max_length=150, null=True)),
-                ('CP', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.PostalCodeCatalog')),
-                ('city', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.CitiesCatalog')),
-                ('state', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.StatesCatalog')),
-                ('suburb', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.SuburbCatalog')),
+                ('CP',
+                 models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.PostalCodeCatalog')),
+                (
+                    'city',
+                    models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.CitiesCatalog')),
+                ('state',
+                 models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.StatesCatalog')),
+                ('suburb',
+                 models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.SuburbCatalog')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -67,7 +72,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='userprofile',
             name='reg_date',
-            field=models.DateTimeField(auto_now=True, default=datetime.datetime(2016, 6, 14, 23, 45, 16, 768000, tzinfo=utc)),
+            field=models.DateTimeField(auto_now=True,
+                                       default=datetime.datetime(2016, 6, 14, 23, 45, 16, 768000, tzinfo=utc)),
             preserve_default=False,
         ),
         migrations.AddField(

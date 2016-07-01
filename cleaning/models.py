@@ -1,10 +1,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
-
-from django.db import models
 from django.conf import settings
-from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator
+from django.db import models
 
 
 # Create your models here.
@@ -113,4 +112,3 @@ class ProductCatalog(models.Model):
     origin = models.CharField(max_length=20, null=True, blank=True)  # origen
     net = models.DecimalField(max_digits=6, decimal_places=2)  # contenido neto
     measure = models.DecimalField(max_digits=6, decimal_places=2)  # medida
-    
