@@ -8,7 +8,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -20,6 +19,7 @@ class Migration(migrations.Migration):
             name='UserProfile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+<<<<<<< HEAD
                 ('photo', models.ImageField(blank=True, null=True, upload_to='profiles', verbose_name='Foto')),
                 ('telephone', models.CharField(blank=True, max_length=15, null=True, verbose_name='Tel\xe9fono')),
                 ('services', models.IntegerField(blank=True, null=True, verbose_name='Servicios solicitados')),
@@ -28,6 +28,12 @@ class Migration(migrations.Migration):
                 ('active', models.BooleanField(default=True)),
                 (
                 'user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+=======
+                ('photo', models.ImageField(blank=True, null=True, upload_to='profiles')),
+                (
+                    'user',
+                    models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+>>>>>>> f5e9ad2b2513f9a876289f5ac2623a93702833c3
             ],
             options={
                 'verbose_name_plural': 'Perfil de usuarios',

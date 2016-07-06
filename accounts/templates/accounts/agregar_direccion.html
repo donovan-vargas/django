@@ -1,0 +1,31 @@
+{% extends 'accounts/base_accounts.html' %}
+
+{% block title %}Agregar dirección{% endblock title %}
+
+{% block accounts_content %}
+    <div class="panel panel-success">
+        <div class="panel-heading">Direcciones agregadas</div>
+        <div class="panel-body">
+            {% if addresses %}
+                {% for address in addresses %}
+                    <a href="{% url 'accounts.editar_direccion' pk=address.pk %}" class="list-group-item">Editar
+                        Dirección:
+                        {{ address.state }} - {{ address.city }} - {{ address.suburb }} - Calle: {{ address.street }} -
+                        Numero: {{ address.number }}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>Aun no a registrado ninguna dirección</p>
+            {% endif %}
+        </div>
+    </div>
+    <h2 class="page-header">Agregar dirección</h2>
+    <form method="post" action="" role="form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Agregar dirección</button>
+            <a href="{% url 'accounts.index' %}" class="btn btn-warning" type="submit">Cancelar</a>
+        </div>
+    </form>
+{% endblock accounts_content %}

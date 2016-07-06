@@ -9,8 +9,13 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.shortcuts import render
 
+<<<<<<< HEAD
 from .forms import RegisterUserForm, EditEmailForm, EditPasswordForm, EditPhoto
 from .models import UserProfile
+=======
+from .forms import RegisterUserForm, EditEmailForm, EditPasswordForm, EditPhoto, AddAddress, UpdateUserAddress
+from .models import UserProfile, UserAddress
+>>>>>>> f5e9ad2b2513f9a876289f5ac2623a93702833c3
 
 
 # Create your views here.
@@ -170,3 +175,83 @@ def edit_photo_view(request):
         form = EditPhoto()
     return render(request, 'accounts/editar_foto.html', {'form': form})
 
+<<<<<<< HEAD
+=======
+
+@login_required
+def add_address_view(request):
+    if request.method == 'POST':
+        form = AddAddress(request.POST)
+        if form.is_valid():
+            clean_data = form.cleaned_data
+            state = clean_data.get('state')
+            city = clean_data.get('city')
+            suburb = clean_data.get('suburb')
+            postal_code = clean_data.get('postal_code')
+            street = clean_data.get('street')
+            number = clean_data.get('number')
+            crossing_x = clean_data.get('crossing_x')
+            crossing_y = clean_data.get('crossing_y')
+            user_address = UserAddress()
+            user_address.state = state
+            user_address.city = city
+            user_address.suburb = suburb
+            user_address.postal_code = postal_code
+            user_address.street = street
+            user_address.number = number
+            user_address.crossing_x = crossing_x
+            user_address.crossing_y = crossing_y
+            user_address.user = request.user
+            user_address.save()
+            messages.success(request, 'Dirección guardada con éxito')
+            return redirect(reverse('accounts.index'))
+    else:
+        form = AddAddress()
+    addresses = UserAddress.objects.filter(user=request.user)
+    context_address = {
+        'addresses': addresses
+    }
+    return render(request, 'accounts/agregar_direccion.html', {'form': form,
+                                                               'addresses': addresses})
+
+
+@login_required
+def edit_address_view(request, pk):
+    if request.method == 'POST':
+        form = UpdateUserAddress(request.POST)
+        if form.is_valid():
+            clean_data = form.cleaned_data
+            state = clean_data.get('state')
+            city = clean_data.get('city')
+            suburb = clean_data.get('suburb')
+            postal_code = clean_data.get('postal_code')
+            street = clean_data.get('street')
+            number = clean_data.get('number')
+            crossing_x = clean_data.get('crossing_x')
+            crossing_y = clean_data.get('crossing_y')
+            user_address = UserAddress(pk)
+            user_address.state = state
+            user_address.city = city
+            user_address.suburb = suburb
+            user_address.postal_code = postal_code
+            user_address.street = street
+            user_address.number = number
+            user_address.crossing_x = crossing_x
+            user_address.crossing_y = crossing_y
+            user_address.user = request.user
+            user_address.save()
+            messages.success(request, 'Dirección actualizada con éxito')
+            return redirect(reverse('accounts.index'))
+    else:
+        addresses = UserAddress.objects.get(pk=pk)
+        form = AddAddress(initial={'state': addresses.state,
+                                   'city': addresses.city,
+                                   'suburb': addresses.suburb,
+                                   'postal_code': addresses.postal_code,
+                                   'street': addresses.street,
+                                   'number': addresses.number,
+                                   'crossing_x': addresses.crossing_x,
+                                   'crossing_y': addresses.crossing_y,})
+
+    return render(request, 'accounts/editar_direccion.html', {'form': form})
+>>>>>>> f5e9ad2b2513f9a876289f5ac2623a93702833c3
