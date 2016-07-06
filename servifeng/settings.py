@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'addresses',
     'companies',
+    'products',
 
 ]
 
