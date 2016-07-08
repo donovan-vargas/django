@@ -65,7 +65,7 @@ class DepartmentsCatalog(models.Model):
 
 
 class CompanyUser(models.Model):
-    company = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="compañia")
+    company = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name="compañia")
     logo = models.ImageField("logotipo", upload_to='profiles', blank=True, null=True)
     activity = models.ManyToManyField(ActivityCatalog, verbose_name="actividades relacionadas")
     RFC = models.CharField(max_length=13, blank=True, null=True)
@@ -143,4 +143,3 @@ class CompanyEmployees(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.employee, self.department)
-
