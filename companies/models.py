@@ -38,7 +38,7 @@ class JobCatalog(models.Model):
         (SEMISENIOR, 'Semisenior'),
         (SENIOR, 'Senior'),
     )
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     job = models.CharField("puesto", max_length=40)
     description = models.CharField("descripción", max_length=200)
     category = models.CharField("categoría", max_length=2, choices=CATEGORY_CHOICE, default=JUNIOR)
@@ -51,6 +51,7 @@ class JobCatalog(models.Model):
 
 
 class DepartmentsCatalog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     department = models.CharField("departamento", max_length=30)
     activities = models.CharField("actividad", max_length=120)
 
@@ -61,9 +62,6 @@ class DepartmentsCatalog(models.Model):
         return self.department
 
 
-
-
-
 class CompanyUser(models.Model):
     company = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name="compañia")
     logo = models.ImageField("logotipo", upload_to='profiles', blank=True, null=True)
@@ -71,7 +69,6 @@ class CompanyUser(models.Model):
     RFC = models.CharField(max_length=13, blank=True, null=True)
     telephone = models.CharField("teléfono", max_length=15, blank=True, null=True)
     ceo = models.CharField("Director", max_length=50, blank=True, null=True)
-
 
     class Meta(object):
         verbose_name_plural = "Compañía"
@@ -81,6 +78,7 @@ class CompanyUser(models.Model):
 
 
 class BranchCompany(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     branch = models.CharField("sucursal", max_length=40)
     telephone = models.CharField("teléfono", max_length=15, blank=True, null=True)
     manager = models.OneToOneField('CompanyEmployees')
@@ -123,7 +121,7 @@ class CompanyEmployees(models.Model):
         (DIVORCED, 'Divorciado'),
         (WIDOWER, 'Viudo'),
     )
-
+    company = models.ForeignKey(CompanyUser)
     employee = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="empleado")
     birthdate = models.DateField("fecha de nacimiento")
     imss = models.IntegerField(validators=[MaxValueValidator(999999999999999), ])

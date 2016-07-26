@@ -8,6 +8,7 @@ from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class ProviderCatalog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     name = models.CharField("nombre", max_length=40)
     RFC = models.CharField(max_length=13, blank=True, null=True)
     registry_date = models.DateTimeField("fecha registro", auto_now=True)
@@ -24,6 +25,7 @@ class ProviderCatalog(models.Model):
 
 
 class PaymentCatalog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     payment_type = models.CharField("forma de pago", max_length=30)
     description = models.CharField("descripcion", max_length=80)
 
@@ -35,6 +37,7 @@ class PaymentCatalog(models.Model):
 
 
 class ProducerCatalog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     producer = models.CharField("productor", max_length=40, blank=True, null=True)
     country = models.CharField("país", max_length=40)
 
@@ -53,7 +56,7 @@ class ProductCatalog(models.Model):
         (FEMALE, 'Mujer')
     )
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     slug = models.SlugField()  # etiqueta para url amigables
     product_name = models.CharField("nombre del producto", max_length=80)
     patent = models.CharField("marca", max_length=80, null=True, blank=True)  # Marca
@@ -75,6 +78,7 @@ class ProductCatalog(models.Model):
 
 
 class Store(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     name = models.CharField("nombre", max_length=40)
     description = models.CharField("descripción", max_length=120, blank=True, null=True)
 
@@ -105,7 +109,7 @@ class Inventory(models.Model):
 
 
 class EntryOrder(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     provider = models.ForeignKey(ProviderCatalog)
     payment = models.ForeignKey(PaymentCatalog)
     store = models.ForeignKey(Store)
@@ -124,6 +128,7 @@ class EntryOrder(models.Model):
 
 
 class EntryOrderDetail(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     order_ref = models.ForeignKey(EntryOrder)
     product = models.ForeignKey(ProductCatalog)
     quantity_order = models.DecimalField("cantidad ordenada", max_digits=6, decimal_places=2)
@@ -137,6 +142,7 @@ class EntryOrderDetail(models.Model):
 
 
 class OutOrder(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     order_ref = models.CharField("referencia", max_length=20)
     client = models.CharField("cliente", max_length=30)
     payment = models.OneToOneField(PaymentCatalog)
@@ -156,6 +162,7 @@ class OutOrder(models.Model):
 
 
 class OutOrderDetail(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     order_ref = models.ForeignKey(OutOrder)
     product = models.OneToOneField(ProductCatalog)
     quantity_order = models.DecimalField("cantidad vendidas", max_digits=6, decimal_places=2)
@@ -183,6 +190,7 @@ class Sales(models.Model):
 
 
 class SalesDetail(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     sale = models.ForeignKey(Sales)
     quantity = models.DecimalField("cantidad", max_digits=6, decimal_places=2)
     amount = models.DecimalField("precio", max_digits=6, decimal_places=2)
